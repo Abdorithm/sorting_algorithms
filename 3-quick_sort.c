@@ -3,9 +3,9 @@
 /**
  * lomuto - implements the Lomuto partition scheme.
  * @array: pointer to the partition.
- * @low: ...
- * @high: ...
- * @size: ...
+ * @low: beginning of the partition.
+ * @high: end of the partition.
+ * @size: size of the array.
  */
 void lomuto(int *array, int low, int high, size_t size)
 {
@@ -24,7 +24,7 @@ void lomuto(int *array, int low, int high, size_t size)
 			temp = array[i];
 			array[i] = array[j];
 			array[j] = temp;
-			if (i != j)
+			if (array[i] != array[j])
 				print_array(array, size);
 			j++;
 		}
@@ -33,7 +33,7 @@ void lomuto(int *array, int low, int high, size_t size)
 	temp = array[j];
 	array[j] = array[high];
 	array[high] = temp;
-	if (j != high)
+	if (array[j] != array[high])
 		print_array(array, size);
 
 	lomuto(array, low, j - 1, size);
