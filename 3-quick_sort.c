@@ -33,7 +33,8 @@ void lomuto(int *array, int low, int high, size_t size)
 	temp = array[j];
 	array[j] = array[high];
 	array[high] = temp;
-	print_array(array, size);
+	if (j != high)
+		print_array(array, size);
 
 	lomuto(array, low, j - 1, size);
 	lomuto(array, j + 1, high, size);
