@@ -8,6 +8,7 @@ void merge(int *array, int l, int m, int r)
 	int i;
 
 	/* printf("\t%i %i %i\n", l, m, r); */
+
 	for (i = l; i < m + 1; i++)
 		printf("%i ", array[i]);
 	printf("\n");
@@ -25,10 +26,14 @@ void merge(int *array, int l, int m, int r)
  */
 void partition(int *array, int l, int r)
 {
+	int m;
+
 	if (l < r) {
-		int m = l + (r - l) / 2;
+		m = l + (r - l) / 2;
+
 		if ((r - l) % 2 == 0 && m)
 			m--;
+
 		partition(array, l, m);
 		partition(array, m + 1, r);
 		
