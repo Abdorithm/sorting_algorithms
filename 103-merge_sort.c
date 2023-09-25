@@ -1,7 +1,11 @@
 #include "sort.h"
 
 /**
- * merge - ...
+ * merge - sort and merge partitions.
+ * @array: the array.
+ * @l: left index.
+ * @m: mid.
+ * @r: right index.
  */
 void merge(int *array, int l, int m, int r)
 {
@@ -28,7 +32,8 @@ void partition(int *array, int l, int r)
 {
 	int m;
 
-	if (l < r) {
+	if (l < r)
+	{
 		m = l + (r - l) / 2;
 
 		if ((r - l) % 2 == 0 && m)
@@ -36,9 +41,9 @@ void partition(int *array, int l, int r)
 
 		partition(array, l, m);
 		partition(array, m + 1, r);
-		
+
 		merge(array, l, m, r);
-    }
+	}
 }
 
 /**
