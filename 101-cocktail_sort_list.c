@@ -1,18 +1,20 @@
 #include "sort.h"
+#include <stdio.h>
 
 /**
- * swapit - swaps double linked list.
- * @node: fist node.
- * @list: the whole list.
-*/
-void swapit(listint_t *node, listint_t **list)
+ * swap - swaps a node with the next node in the list
+ * @list: double pointer to the beginning of the list
+ * @node: node to swap
+ *
+ * Return: void
+ */
+void swap(listint_t **list, listint_t *node)
 {
 	node->next->prev = node->prev;
 	if (node->prev)
 		node->prev->next = node->next;
 	else
 		*list = node->next;
-
 	node->prev = node->next;
 	node->next = node->next->next;
 	node->prev->next = node;
@@ -21,48 +23,48 @@ void swapit(listint_t *node, listint_t **list)
 }
 
 /**
- * cocktail_sort_list - 2-D bubble sort.
- * @list: the list to be sorted.
-*/
+ * cocktail_sort_list - sorts a doubly linked list of integers in ascending
+ * order using the Cocktail shaker sort algorithm
+ * @list: Double pointer to the head of the doubly linked list
+ *
+ * Return: void
+ */
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *seak = *list;
-	int swapped = TRUE;
+	char swapped = 1;
+	listint_t *temp;
 
-	if (!list || !(*list))
+	if (list == NULL || *list == NULL)
 		return;
-
-	while (swapped)
+	temp = *list;
+	while (swapped != 0)
 	{
-		swapped = FALSE;
-		while (seak->next != NULL)
+		swapped = 0;
+		while (temp->next != NULL)
 		{
-			if (!seak->next)
-				break;
-			if (seak->n > seak->next->n)
+			if (temp->next->n < temp->n)
 			{
-				swapit(seak, list);
-				swapped = TRUE;
+				swap(list, temp);
+				swapped = 1;
 				print_list(*list);
 			}
 			else
-				seak = seak->next;
+				temp = temp->next;
 		}
-		if (!swapped)
+		if (swapped == 0)
 			break;
-
-		while (seak->prev != NULL)
+		swapped = 0;
+		while (temp->prev != NULL)
 		{
-			if (seak->n < seak->prev->n)
+			if (temp->prev->n > temp->n)
 			{
-				swapit(seak->prev, list);
-				swapped = TRUE;
+				swap(list, temp->prev);
+				swapped = 1;
 				print_list(*list);
 			}
 			else
-				seak = seak->prev;
+				temp = temp->prev;
 		}
-		seak = seak->next;
 	}
 }
 
