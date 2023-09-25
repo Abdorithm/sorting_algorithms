@@ -9,9 +9,13 @@
  */
 void merge(int *array, int l, int m, int r)
 {
-	int i;
+	int i, j, k;
+	int length_1 = m - l + 1; 
+	int length_2 = r - m;
+	int left[length_1], right[length_2];
 
-	/* printf("\t%i %i %i\n", l, m, r); */
+	/*
+	printf("\t%i %i %i\n", l, m, r); 
 
 	for (i = l; i < m + 1; i++)
 		printf("%i ", array[i]);
@@ -20,6 +24,11 @@ void merge(int *array, int l, int m, int r)
 	for (i = m + 1; i <= r; i++)
 		printf("%i ", array[i]);
 	printf("\n");
+	*/
+	for (i = 0; i < length_1; i++)
+        left[i] = array[l + i];
+	for (j = 0; j < length_2; j++)
+        right[j] = array[m + 1 + j];
 }
 
 /**
