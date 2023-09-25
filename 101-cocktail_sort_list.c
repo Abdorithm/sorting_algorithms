@@ -2,29 +2,22 @@
 
 /**
  * swapit - swaps double linked list.
- * @nod1: fist node.
- * @nod2: second node.
+ * @node: fist node.
  * @list: the whole list.
 */
-void swapit(listint_t *nod1, listint_t *nod2, listint_t **list)
+void swapit(listint_t *node, listint_t **list)
 {
-	listint_t *nod1s_back = nod1->prev;
-	listint_t *nod2s_front = nod2->next;
-
-	if (nod1 == nod2)
-		return;
-
-	nod2->next = nod1;
-	nod2->prev = nod1s_back;
-	if (nod1s_back)
-		nod1s_back->next = nod2;
+	node->next->prev = node->prev;
+	if (node->prev)
+		node->prev->next = node->next;
 	else
-		*list = nod2;
+		*list = node->next;
 
-	nod1->next = nod2s_front;
-	nod1->prev = nod2;
-	if (nod2s_front)
-		nod2s_front->prev = nod1;
+	node->prev = node->next;
+	node->next = node->next->next;
+	node->prev->next = node;
+	if (node->next)
+		node->next->prev = node;
 }
 
 /**
@@ -34,7 +27,7 @@ void swapit(listint_t *nod1, listint_t *nod2, listint_t **list)
 void cocktail_sort_list(listint_t **list)
 {
 	listint_t *seak = *list;
-	listint_t *right = NULL, *left = NULL, *temp;
+	listint_t *right = NULL, *temp;
 	int swapped = TRUE;
 
 	if (!list || !(*list))
@@ -50,7 +43,7 @@ void cocktail_sort_list(listint_t **list)
 			if (seak->n > seak->next->n)
 			{
 				temp = seak->next;
-				swapit(seak, seak->next, list);
+				swapit(seak, list);
 				seak = temp;
 				swapped = TRUE;
 				print_list(*list);
@@ -59,18 +52,17 @@ void cocktail_sort_list(listint_t **list)
 		if (!swapped)
 			break;
 		right = seak;
-		for (; seak->prev != left; seak = seak->prev)
+		for (; seak->prev != NULL; seak = seak->prev)
 		{
 			if (seak->n < seak->prev->n)
 			{
 				temp = seak->prev;
-				swapit(seak->prev, seak, list);
+				swapit(seak->prev, list);
 				seak = temp;
 				swapped = TRUE;
 				print_list(*list);
 			}
 		}
-		left = seak;
 		seak = seak->next;
 	}
 }
