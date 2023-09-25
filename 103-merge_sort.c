@@ -12,24 +12,20 @@ void merge(int *array, int l, int m, int r)
 	int i, j, k;
 	int length_1 = m - l + 1;
 	int length_2 = r - m;
-	int left[length_1], right[length_2];
+	int *splits = (int *)malloc(sizeof(int) * (length_1 + length_2));
 
-	/*
-	printf("\t%i %i %i\n", l, m, r);
-
-	for (i = l; i < m + 1; i++)
-		printf("%i ", array[i]);
-	printf("\n");
-
-	for (i = m + 1; i <= r; i++)
-		printf("%i ", array[i]);
-	printf("\n");
-	*/
+	printf("\t%i %i %i\n", length_1, m, length_2);
 
 	for (i = 0; i < length_1; i++)
-		left[i] = array[l + i];
+		splits[i] = array[l + i];
 	for (j = 0; j < length_2; j++)
-		right[j] = array[m + 1 + j];
+		splits[j + length_1] = array[m + 1 + j];
+
+	(void)k;
+	for (i = 0; i < length_1 + length_2; i++)
+		printf("%i ", splits[i]);
+	printf("\n");
+	free(splits);
 }
 
 /**
