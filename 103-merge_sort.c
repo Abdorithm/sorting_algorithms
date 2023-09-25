@@ -47,8 +47,30 @@ void merge(int *array, int l, int m, int r)
 		j++, k++;
 	}
 
-	for (i = 0; i < length_1 + length_2; i++)
-		printf("%i ", splits[i]);
+	printf("Merging...\n");
+	printf("[left]: ");
+	for (i = 0; i < length_1; i++)
+	{
+		printf("%i", splits[i]);
+		if (i < length_1 - 1)
+			printf(", ");
+	}
+	printf("\n");
+	printf("[Right]: ");
+	for (i = length_1; i < length_1 + length_2; i++)
+	{
+		printf("%i", splits[i]);
+		if (i < length_1 + length_2 - 1)
+			printf(", ");
+	}
+	printf("\n");
+	printf("[Done]: ");
+	for (i = l; i < l + length_1 + length_2; i++)
+	{
+		printf("%i", array[i]);
+		if (i < l + length_1 + length_2 - 1)
+			printf(", ");
+	}
 	printf("\n");
 	free(splits);
 }
