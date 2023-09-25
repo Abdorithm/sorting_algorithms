@@ -21,7 +21,7 @@ void document(int *array, int *splits, int length_1, int length_2, int l)
 			printf(", ");
 	}
 	printf("\n");
-	printf("[Right]: ");
+	printf("[right]: ");
 	for (i = length_1; i < length_1 + length_2; i++)
 	{
 		printf("%i", splits[i]);
